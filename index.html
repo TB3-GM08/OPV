@@ -142,7 +142,7 @@
         margin-bottom: 15px;
         letter-spacing: -1px;
         line-height: 1.2;
-        
+
         /* Aplicación de animación base */
         opacity: 0;
         animation: heroFadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -155,7 +155,7 @@
         color: var(--accent-light);
         margin-bottom: 25px;
         letter-spacing: 1px;
-        
+
         /* Retraso de animación para jerarquía visual */
         opacity: 0;
         animation: heroFadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -167,7 +167,7 @@
         margin: 0 auto 40px auto;
         font-size: 1.2rem;
         color: var(--text-muted);
-        
+
         /* Último bloque de texto en aparecer */
         opacity: 0;
         animation: heroFadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -482,6 +482,85 @@
           align-items: center;
         }
       }
+
+      .banner-con-foto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 100px 20px; /* Un poco más de aire */
+        min-height: 90vh; /* Ocupa más de la pantalla */
+      }
+
+      /* Contenedor circular con borde iluminado */
+      .foto-perfil-container {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        margin-bottom: 40px; /* Separación con el nombre */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* Borde base sólido */
+        border: 3px solid rgba(45, 212, 191, 0.4);
+
+        /* Efectos de iluminación y profundidad */
+        box-shadow:
+          0 0 15px rgba(13, 148, 136, 0.3),
+          /* Brillo externo teal */ inset 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra interna para profundidad */
+
+        overflow: hidden; /* Mantiene la foto circular */
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+      }
+
+      /* Efecto al pasar el cursor sobre la foto */
+      .foto-perfil-container:hover {
+        transform: scale(1.03) translateY(-5px);
+        box-shadow:
+          0 0 25px rgba(45, 212, 191, 0.6),
+          /* Brillo más intenso */ inset 0 0 15px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Estilos para la imagen real */
+      .foto-perfil {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ajuste perfecto sin deformar */
+        object-position: center; /* Centra la cara */
+        display: block;
+      }
+
+      /* Marcador de posición si no hay imagen */
+      .foto-placeholder {
+        width: 100%;
+        height: 100%;
+        background-color: var(--card-bg);
+        color: var(--accent-color);
+        font-size: 3.5rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        text-transform: uppercase;
+      }
+
+      /* Ajustes de responsividad para móviles */
+      @media (max-width: 768px) {
+        .foto-perfil-container {
+          width: 140px;
+          height: 140px;
+          margin-bottom: 30px;
+        }
+        .banner-con-foto {
+          padding: 80px 20px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -495,15 +574,30 @@
       </ul>
     </nav>
 
-    <header id="inicio" class="hero">
-      <h1>Octavio Alberto Palafox Valdez</h1>
-      <h2>Ingeniero en Sistemas Computacionales</h2>
-      <p>
-        Transformando la visión técnica en resultados de negocio. Especialista
-        en Gestión Ágil de Proyectos, Desarrollo Front-end y Estrategias
-        Digitales (SEO/SEM).
-      </p>
-      <a href="#contacto" class="btn">Trabajemos Juntos</a>
+    <header id="inicio" class="hero banner-con-foto">
+      <div class="foto-perfil-container reveal">
+        <img
+          src="https://i.postimg.cc/DyL5cQ1v/Whats-App-Image-2026-06-10-at-3-55-13-PM-(1).jpg"
+          alt="Foto de Octavio Palafox"
+          class="foto-perfil"
+          onerror="
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'flex';
+          "
+        />
+        <div class="foto-placeholder" style="display: none">OP</div>
+      </div>
+
+      <div class="hero-content">
+        <h1>Octavio Alberto Palafox Valdez</h1>
+        <h2>Ingeniero en Sistemas Computacionales</h2>
+        <p>
+          Transformando la visión técnica en resultados de negocio. Especialista
+          en Gestión Ágil de Proyectos, Desarrollo Front-end y Estrategias
+          Digitales (SEO/SEM).
+        </p>
+        <a href="#contacto" class="btn">Trabajemos Juntos</a>
+      </div>
     </header>
 
     <section id="sobre-mi">
